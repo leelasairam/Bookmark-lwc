@@ -1,0 +1,38 @@
+<template>
+    <div style="background-color: white;padding:0.5rem">
+        <!--filter-->
+        <div style="margin-bottom: 1rem;">
+            <lightning-layout>
+                <!--object type-->
+                <lightning-layout-item size="4">
+                    <lightning-combobox
+                        label="Object Type"
+                        value={filter}
+                        options={objectOptions}
+                        onchange={handleObjectChange} variant="label-hidden" >
+                    </lightning-combobox>
+                </lightning-layout-item>
+                <!--space-->
+                <lightning-layout-item size="6"></lightning-layout-item>
+                <!--refresh-->
+                <lightning-layout-item size="2">
+                    <lightning-button icon-name="utility:refresh" label="Refresh" onclick={refreshBookmarks} variant="brand-outline"></lightning-button>
+                </lightning-layout-item>
+            </lightning-layout>
+        </div>
+        <!--datatable-->
+        <lightning-datatable
+                key-field="id"
+                data={bookmarks}
+                columns={cols}
+                show-row-number-column
+                hide-checkbox-column
+                onrowaction={handleRowAction}>
+        </lightning-datatable>
+    </div>
+
+    <!--spinner-->
+    <div if:true={loading}>
+        <lightning-spinner alternative-text="Loading" size="medium" variant="brand"></lightning-spinner>
+    </div>
+</template>
